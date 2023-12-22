@@ -46,15 +46,15 @@ i barely understand how this works but it works so thats good enough for me
 '''
 def total(injections, t_values):
     result = np.zeros(len(t_values))
-    for i in range(len(injections)):
+    for injection in injections:
         for t in t_values:
             #values used in calculation, resets for each injection
-            date = injections[i][0]
-            dose = injections[i][1]
-            a = injections[i][2][0]
-            b = injections[i][2][1]
-            c = injections[i][2][2]
-            d = injections[i][2][3]
+            date = injection[0]
+            dose = injection[1]
+            a = injection[2][0]
+            b = injection[2][1]
+            c = injection[2][2]
+            d = injection[2][3]
             #calculates the curve for each injection and adds it to the final curve
             if date < t < date + 100:
                 term = (dose * d / 5) * a * b * (
