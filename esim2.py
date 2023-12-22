@@ -37,8 +37,6 @@ def parse_injections(userinput):
     terms = [term.strip(" ()[]").lower() for term in userinput.split(',')]
     return list(map(parse_line, terms))
 
-injections = parse_injections(userinput)
-
 '''
 basically the desmos calc but in python
 takes the input injection list and a numpy linspace, returns the curve
@@ -100,12 +98,15 @@ def show_graph(t_values, y_values, xlimit):
     plt.xlim(-1, xlimit)
     plt.show()
 
-# makes an array of 1000 numbers from 0 to 200 linearly (i.e. 0.2 increments)
-t_values = np.linspace(0, 200, 1000)
+if __name__ == '__main__':
+    injections = parse_injections(userinput)
 
-# sets the x limit to be a week past the last injection, you can set it to
-# any int for a custom x axis length
-xlimit = injections[(len(injections)-1)][0]+7
+    # makes an array of 1000 numbers from 0 to 200 linearly (i.e. 0.2 increments)
+    t_values = np.linspace(0, 200, 1000)
 
-y_values = total(injections, t_values)
-show_graph(t_values, y_values, xlimit)
+    # sets the x limit to be a week past the last injection, you can set it to
+    # any int for a custom x axis length
+    xlimit = injections[(len(injections)-1)][0]+7
+
+    y_values = total(injections, t_values)
+    show_graph(t_values, y_values, xlimit)
