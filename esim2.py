@@ -36,9 +36,6 @@ for term in [term.strip(" ()[]").lower() for term in userinput.split(',')]:
         case _: a[2] = een #defaults to EEn
     injections.append(a)
 
-#sets the x limit to be a week past the last injection, you can set it to any int for a custom x axis length
-xlimit = injections[(len(injections)-1)][0]+7
-
 '''
 basically the desmos calc but in python
 takes the input injection list and a numpy linspace, returns the curve
@@ -65,7 +62,7 @@ def total(injections, t_values):
                 result[t_values == t] += term
     return result
 
-def show_graph(t_values, y_values):
+def show_graph(t_values, y_values, xlimit):
     #aesthetics
     plt.rcParams.update({
         'axes.facecolor': '#1e1e1e',
@@ -100,8 +97,12 @@ def show_graph(t_values, y_values):
     plt.xlim(-1, xlimit)
     plt.show()
 
-
-#does stuff
+# makes an array of 1000 numbers from 0 to 200 linearly (i.e. 0.2 increments)
 t_values = np.linspace(0, 200, 1000)
+
+# sets the x limit to be a week past the last injection, you can set it to
+# any int for a custom x axis length
+xlimit = injections[(len(injections)-1)][0]+7
+
 y_values = total(injections, t_values)
-show_graph(t_values, y_values)
+show_graph(t_values, y_values, xlimit)
