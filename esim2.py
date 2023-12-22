@@ -65,40 +65,43 @@ def total(injections, t_values):
                 result[t_values == t] += term
     return result
 
+def show_graph(t_values, y_values):
+    #aesthetics
+    plt.rcParams.update({
+        'axes.facecolor': '#1e1e1e',
+        'figure.facecolor':'#1e1e1e',
+        'text.color': '#d4d4d4',
+        'axes.titleweight': '500',
+
+        'xtick.color': '#1e1e1e',
+        'xtick.labelcolor': '#d4d4d4',
+        'ytick.color': '#1e1e1e',
+        'ytick.labelcolor': '#d4d4d4',
+
+        'grid.color': '#d4d4d4',
+        'grid.linewidth': '0.1',
+
+        'axes.spines.left': 'false',
+        'axes.spines.right':'false',
+        'axes.spines.top':'false',
+        'axes.spines.bottom':'false',
+        'font.family': 'monospace'
+    })
+
+    #plot curve
+    plt.plot(t_values, y_values, color= '#FADADD')
+    plt.fill_between(t_values, y_values, alpha = 0.1, color= "#FADADD", linewidth= 0)
+
+    #chart title, labels, and axis limit
+    plt.title('Better Injectable Estradiol Simulator')
+    plt.xlabel('Days')
+    plt.ylabel('Estradiol level (pg/mL)')
+    plt.grid(True)
+    plt.xlim(-1, xlimit)
+    plt.show()
+
+
 #does stuff
 t_values = np.linspace(0, 200, 1000)
 y_values = total(injections, t_values)
-
-#aesthetics
-plt.rcParams.update({
-    'axes.facecolor': '#1e1e1e',
-    'figure.facecolor':'#1e1e1e',
-    'text.color': '#d4d4d4',
-    'axes.titleweight': '500',
-
-    'xtick.color': '#1e1e1e',
-    'xtick.labelcolor': '#d4d4d4',
-    'ytick.color': '#1e1e1e',
-    'ytick.labelcolor': '#d4d4d4',
-
-    'grid.color': '#d4d4d4',
-    'grid.linewidth': '0.1',
-
-    'axes.spines.left': 'false',
-    'axes.spines.right':'false',
-    'axes.spines.top':'false',
-    'axes.spines.bottom':'false',
-    'font.family': 'monospace'
-})
-
-#plot curve
-plt.plot(t_values, y_values, color= '#FADADD')
-plt.fill_between(t_values, y_values, alpha = 0.1, color= "#FADADD", linewidth= 0)
-
-#chart title, labels, and axis limit
-plt.title('Better Injectable Estradiol Simulator')
-plt.xlabel('Days')
-plt.ylabel('Estradiol level (pg/mL)')
-plt.grid(True)
-plt.xlim(-1, xlimit)
-plt.show()
+show_graph(t_values, y_values)
