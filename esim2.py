@@ -30,14 +30,12 @@ def parse_injections(userinput):
             ester injected (een/ev/eu/ec)]
         ]
     '''
-    result = []
-    for term in [term.strip(" ()[]").lower() for term in userinput.split(',')]:
-        a = term.split('/')
-        a[0] = float(a[0])
-        a[1] = float(a[1])
-        a[2] = esters[a[2]]
-        result.append(a)
-    return result
+    def parse_line(line):
+        day, dose, ester = line.split('/')
+        return [float(day), float(dose), esters[ester]]
+
+    terms = [term.strip(" ()[]").lower() for term in userinput.split(',')]
+    return list(map(parse_line, terms))
 
 injections = parse_injections(userinput)
 
